@@ -32,7 +32,7 @@ class Vector:
     def length2(self):
         return self.x * self.x + self.y * self.y
 
-    def normalized(self):
+    def norm(self):
         length = self.length()
         if length > 0:
             return Vector(self.x / length, self.y / length)
