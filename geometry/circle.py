@@ -1,6 +1,3 @@
-from .point import *
+from collections import namedtuple 
 
-class Circle:
-    def __init__(self, x, y, radius):
-        self.position = Point(x, y)
-        self.radius = radius
+Circle = namedtuple('Circle', 'position radius')

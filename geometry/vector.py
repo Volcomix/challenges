@@ -1,9 +1,8 @@
 import math
+from collections import namedtuple 
 
-class Vector:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+class Vector(namedtuple('Vector', 'x y')):
+    __slots__ = ()
 
     def __add__(self, other):
         return Vector(self.x + other.x, self.y + other.y)
@@ -26,14 +25,17 @@ class Vector:
     def __floordiv__(self, scalar):
         return Vector(self.x // scalar, self.y // scalar)
 
+    @property
     def length(self):
         return math.hypot(self.x, self.y)
 
+    @property
     def length2(self):
         return self.x * self.x + self.y * self.y
 
+    @property
     def norm(self):
-        length = self.length()
+        length = self.length
         if length > 0:
             return Vector(self.x / length, self.y / length)
         return Vector(0, 0)
