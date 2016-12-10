@@ -6,12 +6,19 @@ BUILD_DIR = './.build'
 
 if len(sys.argv) != 2:
     print('''
-usage: python builder.py <filename>
+Usage: python builder/build.py <filename>
 
-<filename> must be a python file name (not a path) in the current directory.
-A .build directory will be created in the current directory. \
+Recursively merge all python files in current directory and subdirectories.
+Directories and files starting with '.' or '__' are excluded from the search. \
+The 'builder' directory is ignored as well.
+A '.build' directory will be created in the current directory. \
 This directory will contain all challenge files merged in \
 a single output file named <filename>.
+
+Arguments:
+ <filename>     Must be a python file name (not a path) located in the current
+                directory. If <filename> does not end with the '.py' extension,
+                it will be added automatically.
 ''')
     sys.exit()
 
@@ -35,6 +42,7 @@ def walk_root():
     for directory in os.scandir('.'):
         if (
             directory.is_dir() and
+            directory.name != 'builder' and
             not directory.name.startswith('.') and
             not directory.name.startswith('__')
         ):
