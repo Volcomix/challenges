@@ -8,8 +8,10 @@ if len(sys.argv) != 2:
     print('''
 usage: python builder.py <filename>
 
-<filename> must be a python file name (not a path) in the same directory
-as builder.py.
+<filename> must be a python file name (not a path) in the current directory.
+A .build directory will be created in the current directory. \
+This directory will contain all challenge files merged in \
+a single output file named <filename>.
 ''')
     sys.exit()
 
