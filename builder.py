@@ -1,14 +1,26 @@
-import os
 import fileinput
+import os
+import sys
 
 BUILD_DIR = './.build'
-OUTPUT_FILE = 'output.py'
-MAIN_FILE = 'main.py'
+
+if len(sys.argv) != 2:
+    print('''
+usage: python builder.py <filename>
+
+<filename> must be a python file name (not a path) in the same directory
+as builder.py.
+''')
+    sys.exit()
+
+challenge_file = sys.argv[1]
+if not challenge_file.endswith('.py'):
+    challenge_file += '.py'
 
 def walk_dir(path):
     files = []
     for entry in os.scandir(path):
-        if entry.name.startswith('.') or entry.name == '__pycache__':
+        if entry.name.startswith('.') or entry.name.startswith('__'):
             continue
         if entry.is_file():
             files.append(entry.path)
@@ -19,7 +31,11 @@ def walk_dir(path):
 def walk_root():
     files = []
     for directory in os.scandir('.'):
-        if not directory.name.startswith('.') and directory.is_dir():
+        if (
+            directory.is_dir() and
+            not directory.name.startswith('.') and
+            not directory.name.startswith('__')
+        ):
             files.extend(walk_dir(directory.path))
     return files
 
@@ -48,8 +64,8 @@ def write_output(files):
     if not os.path.exists(BUILD_DIR):
         os.mkdir(BUILD_DIR)
     with fileinput.input(files) as in_file, \
-         open(BUILD_DIR + '/' + OUTPUT_FILE, 'w') as out_file, \
-         open('./' + MAIN_FILE, 'r') as main_file:
+         open(BUILD_DIR + '/' + challenge_file, 'w') as out_file, \
+         open('./' + challenge_file, 'r') as main_file:
         
         main_lines = main_file.readlines()
         main_line_idx = write_imports(main_lines, out_file)
