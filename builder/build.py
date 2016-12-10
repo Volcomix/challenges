@@ -29,7 +29,11 @@ if not challenge_file.endswith('.py'):
 def walk_dir(path):
     files = []
     for entry in os.scandir(path):
-        if entry.name.startswith('.') or entry.name.startswith('__'):
+        if (
+            entry.name == 'builder' or
+            entry.name.startswith('.') or
+            entry.name.startswith('__')
+        ):
             continue
         if entry.is_file():
             files.append(entry.path)

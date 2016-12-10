@@ -1,4 +1,4 @@
-from common.geometry.point import *
+from ..geometry.point import *
 
 class Circle:
     def __init__(self, x, y, radius):
