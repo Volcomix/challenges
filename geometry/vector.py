@@ -33,7 +33,6 @@ class Vector(namedtuple('Vector', 'x y')):
     def length2(self):
         return self.x * self.x + self.y * self.y
 
-    @property
     def norm(self):
         length = self.length
         if length > 0:
