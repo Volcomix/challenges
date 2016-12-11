@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 from ..geometry.circle import *
 
 class Body(namedtuple('Body', Circle._fields + ('speed', 'mass'))):
