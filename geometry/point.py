@@ -1,6 +1,8 @@
 import math
 from collections import namedtuple 
 
+from .vector import *
+
 class Point(namedtuple('Point', 'x y')):
     __slots__ = ()
 
@@ -8,7 +10,7 @@ class Point(namedtuple('Point', 'x y')):
         return Point(self.x + other.x, self.y + other.y)
 
     def __sub__(self, other):
-        return Point(self.x - other.x, self.y - other.y)
+        return Vector(self.x - other.x, self.y - other.y)
 
     def dist(self, other):
         return math.hypot(other.x - self.x, other.y - self.y)
