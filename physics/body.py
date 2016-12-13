@@ -1,6 +1,8 @@
+import math
 from collections import namedtuple
 
 from ..geometry.circle import *
+from entities.checkpoint import *
 
 class Body(namedtuple('Body', Circle._fields + ('speed', 'mass'))):
     __slots__ = ()
