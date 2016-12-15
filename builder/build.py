@@ -47,6 +47,7 @@ def walk_root():
         if (
             directory.is_dir() and
             directory.name != 'builder' and
+            directory.name != 'simulator' and
             not directory.name.startswith('.') and
             not directory.name.startswith('__')
         ):
