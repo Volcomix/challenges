@@ -4,17 +4,20 @@ from collections import namedtuple
 from ..geometry.circle import *
 from entities.checkpoint import *
 
-class Body(namedtuple('Body', Circle._fields + ('speed', 'mass'))):
-    __slots__ = ()
+class Body(Circle):
+    def __init__(self, position, radius, speed, mass):
+        super().__init__(position, radius)
+        self.speed = speed
+        self.mass = mass
 
     def move(self):
-        return self._replace(position=self.position + self.speed)
+        self.position += self.speed
 
     def thrust(self, acceleration):
-        return self._replace(speed=self.speed + acceleration)
+        self.speed += acceleration
 
     def friction(self, value):
-        return self._replace(speed=self.speed * value)
+        self.speed *= value
 
     def will_collide_circle(self, circle):
         dist = self.position.dist(circle.position)
