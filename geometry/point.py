@@ -1,10 +1,14 @@
 import math
-from collections import namedtuple 
 
 from .vector import *
 
-class Point(namedtuple('Point', 'x y')):
-    __slots__ = ()
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    def clone(self):
+        return Point(self.x, self.y)
 
     def __add__(self, other):
         return Point(self.x + other.x, self.y + other.y)

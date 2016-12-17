@@ -11,13 +11,17 @@ class Body(Circle):
         self.mass = mass
 
     def move(self):
-        self.position += self.speed
+        self.position.x += self.speed.x
+        self.position.y += self.speed.y
 
-    def thrust(self, acceleration):
-        self.speed += acceleration
-
+    def thrust(self, angle, value):
+        self.angle += angle
+        self.speed.x += math.cos(self.angle) * value
+        self.speed.y += math.sin(self.angle) * value
+    
     def friction(self, value):
-        self.speed *= value
+        self.speed.x *= value
+        self.speed.y *= value
 
     def will_collide_circle(self, circle):
         dist = self.position.dist(circle.position)
