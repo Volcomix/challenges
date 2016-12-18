@@ -7,6 +7,9 @@ class Point:
         self.x = x
         self.y = y
     
+    def __str__(self):
+        return 'Point(x={0}, y={1})'.format(self.x, self.y)
+    
     def clone(self):
         return Point(self.x, self.y)
 

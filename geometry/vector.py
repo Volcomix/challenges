@@ -5,6 +5,9 @@ class Vector:
         self.x = x
         self.y = y
     
+    def __str__(self):
+        return 'Vector(x={0}, y={1})'.format(self.x, self.y)
+    
     def clone(self):
         return Vector(self.x, self.y)
 
