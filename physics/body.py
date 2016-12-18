@@ -20,6 +20,27 @@ class Body(Circle):
 
     def thrust(self, angle, value):
         self.angle += angle
+
+        """x = self.angle
+        if x < -3.14159265:
+            x += 6.28318531
+        elif x > 3.14159265:
+            x -= 6.28318531
+
+        if x < 0:
+            sin = 1.27323954 * x + 0.405284735 * x * x
+        else:
+            sin = 1.27323954 * x - 0.405284735 * x * x
+
+        x += 1.57079632
+        if x >  3.14159265:
+            x -= 6.28318531
+
+        if x < 0:
+            cos = 1.27323954 * x + 0.405284735 * x * x
+        else:
+            cos = 1.27323954 * x - 0.405284735 * x * x"""
+
         self.speed.x += math.cos(self.angle) * value
         self.speed.y += math.sin(self.angle) * value
     
