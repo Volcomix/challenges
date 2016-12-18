@@ -45,6 +45,15 @@ class Vector:
         if length > 0:
             return Vector(self.x / length, self.y / length)
         return Vector(0, 0)
+    
+    def normalize(self):
+        length = self.length
+        if length > 0:
+            self.x /= length
+            self.y /= length
+        else:
+            self.x = 0
+            self.y = 0
 
     def dot(self, other):
         return self.x * other.x + self.y * other.y
