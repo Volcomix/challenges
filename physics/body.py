@@ -49,12 +49,22 @@ class Body(Circle):
         self.speed.y *= value
     
     def is_on_circle(self, circle):
-        return self.position.dist2(circle.position) < circle.radius * circle.radius
+        if (
+            abs(self.position.x - circle.position.x) < circle.radius and
+            abs(self.position.y - circle.position.y) < circle.radius
+        ):
+            return self.position.dist2(circle.position) < circle.radius * circle.radius
+        return False
     
     def did_collide(self, other):
-        dist2 = self.position.dist2(other.position)
         sum_radius = self.radius + other.radius
-        return dist2 <= sum_radius * sum_radius
+        if (
+            abs(self.position.x - other.position.x) < sum_radius and
+            abs(self.position.y - other.position.y) < sum_radius
+        ):
+            dist2 = self.position.dist2(other.position)
+            return dist2 <= sum_radius * sum_radius
+        return False
     
     def bounce(self, other):
         n = self.position - other.position
